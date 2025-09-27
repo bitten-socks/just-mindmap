@@ -285,6 +285,12 @@ const MindmapLayout = () => {
   
   return (
     <div className={`mindmap-container ${theme}`}>
+      <div className="ad-overlay-left">
+        <AdFit unit="DAN-6V6y9l7qqUQ1vRfj" width="160" height="600" />
+      </div>
+      <div className="ad-overlay-bottom">
+        <AdFit unit="DAN-4cbXDLFAl25iUnsM" width="728" height="90" />
+      </div>
       <div className={`top-left-header ${isHeaderCollapsed ? 'collapsed' : ''}`}>
         <div className="header-title-bar" onClick={() => setIsHeaderCollapsed(!isHeaderCollapsed)}>
           <h1>내가 쓸려고 만든 마인드 맵 드로잉 툴</h1>
