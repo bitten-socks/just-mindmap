@@ -13,6 +13,7 @@ import 'reactflow/dist/style.css';
 import './index.css';
 
 import MindmapNode from './MindmapNode';
+import AdFit from './AdFit';
 
 const nodeTypes = { mindmapNode: MindmapNode };
 const initialNodes = [
