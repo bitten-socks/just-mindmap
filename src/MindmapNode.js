@@ -1,14 +1,13 @@
 // src/MindmapNode.js
 
-import React, { memo, useState, useEffect, useContext } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
-import { LayoutContext } from './App';
 
 const MindmapNode = memo(({ data, selected }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
-  const { layoutDirection } = useContext(LayoutContext);
-  const isHorizontal = layoutDirection === 'horizontal';
+
+  const isHorizontal = data.layoutDirection === 'horizontal';
   const targetHandlePosition = isHorizontal ? Position.Left : Position.Top;
   const sourceHandlePosition = isHorizontal ? Position.Right : Position.Bottom;
 
