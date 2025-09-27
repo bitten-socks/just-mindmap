@@ -298,11 +298,11 @@ const MindmapLayout = () => {
             <br />
             대신 광고 두개만 붙이겠습니다.... 시간나면 한번씩 눌러주세여... 만들었는데 돈은 벌어야죠...
             <br /><br />
-            - 스크립트 복사/붙여넣기로 저장/불러오기<br />
-            - CSV 형태로 내보내기
+            - 스크립트 형태로 클립보드에 복사해서 메모장 같은 곳에 저장해놓고 스크립트 붙여넣기로 불러오기 가능합니다.<br />
+            - CSV 형태로 내보내기 가능합니다. (노드 안의 텍스트 수정 안한상태에서 내보내면 의도된 형태로 안나갈 수 있습니다.)
             <br /><br />
             수정이나 개선 필요한점 있으면 인스타로 연락주세여 {' '}
-            <a href="https://www.instagram.com/Im_Group_Instagram" target="_blank" rel="noopener noreferrer">@Im_Group_Instagram</a>
+            <a href="https://www.instagram.com/imgroup_1009?igsh=MW1wY2V2NDl5cGN4Zw==" target="_blank" rel="noopener noreferrer">@Im_Group_Instagram</a>
           </p>
         </div>
       </div>
