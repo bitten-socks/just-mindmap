@@ -204,23 +204,39 @@ const MindmapLayout = () => {
         if (event.key.startsWith('Arrow')) {
             event.preventDefault();
             if (!selectedNode) return;
+
             const parentEdge = edges.find(e => e.target === selectedNode.id);
             const childrenEdges = edges.filter(e => e.source === selectedNode.id);
             const siblingsEdges = parentEdge ? edges.filter(e => e.source === parentEdge.source) : [];
             const currentIndex = siblingsEdges.findIndex(e => e.target === selectedNode.id);
+
             let targetNodeId = null;
-            if (event.key === 'ArrowUp') {
-                if (layoutDirection === 'vertical' && parentEdge) targetNodeId = parentEdge.source;
-                else if (currentIndex > 0) targetNodeId = siblingsEdges[currentIndex - 1].target;
-            } else if (event.key === 'ArrowDown') {
-                if (layoutDirection === 'vertical' && childrenEdges.length > 0) targetNodeId = childrenEdges[0].target;
-                else if (currentIndex < siblingsEdges.length - 1) targetNodeId = siblingsEdges[currentIndex + 1].target;
-            } else if (event.key === 'ArrowLeft') {
-                if (layoutDirection === 'horizontal' && parentEdge) targetNodeId = parentEdge.source;
-            } else if (event.key === 'ArrowRight') {
-                if (layoutDirection === 'horizontal' && childrenEdges.length > 0) targetNodeId = childrenEdges[0].target;
+
+            if (layoutDirection === 'horizontal') {
+                if (event.key === 'ArrowLeft' && parentEdge) {
+                    targetNodeId = parentEdge.source; // To Parent
+                } else if (event.key === 'ArrowRight' && childrenEdges.length > 0) {
+                    targetNodeId = childrenEdges[0].target; // To First Child
+                } else if (event.key === 'ArrowUp' && currentIndex > 0) {
+                    targetNodeId = siblingsEdges[currentIndex - 1].target; // To Previous Sibling
+                } else if (event.key === 'ArrowDown' && currentIndex < siblingsEdges.length - 1) {
+                    targetNodeId = siblingsEdges[currentIndex + 1].target; // To Next Sibling
+                }
+            } else { // Vertical Mode
+                if (event.key === 'ArrowUp' && parentEdge) {
+                    targetNodeId = parentEdge.source; // To Parent
+                } else if (event.key === 'ArrowDown' && childrenEdges.length > 0) {
+                    targetNodeId = childrenEdges[0].target; // To First Child
+                } else if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                    targetNodeId = siblingsEdges[currentIndex - 1].target; // To Previous Sibling
+                } else if (event.key === 'ArrowRight' && currentIndex < siblingsEdges.length - 1) {
+                    targetNodeId = siblingsEdges[currentIndex + 1].target; // To Next Sibling
+                }
             }
-            if (targetNodeId) setNodes(nds => nds.map(n => ({ ...n, selected: n.id === targetNodeId })));
+
+            if (targetNodeId) {
+              setNodes(nds => nds.map(n => ({ ...n, selected: n.id === targetNodeId })));
+            }
             return;
         }
         
