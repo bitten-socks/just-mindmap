@@ -15,9 +15,8 @@ import './index.css';
 import MindmapNode from './MindmapNode';
 
 const nodeTypes = { mindmapNode: MindmapNode };
-
 const initialNodes = [
-  { id: '1', type: 'mindmapNode', data: { id: '1', label: '새로운 생각' }, position: { x: 0, y: 0 } },
+  { id: '1', type: 'mindmapNode', data: { id: '1', label: '새로운 생각', layoutDirection: 'horizontal' }, position: { x: 0, y: 0 } },
 ];
 const initialEdges = [];
 
@@ -165,8 +164,10 @@ const MindmapLayout = () => {
     document.body.removeChild(link);
   }, [nodes, edges]);
 
-  const importFromText = useCallback(() => {
-    const text = importTextRef.current.value;
+  // [수정 1] 함수가 textarea DOM 요소를 직접 인자로 받도록 변경
+  const importFromText = useCallback((textareaElement) => {
+    if (!textareaElement) return; // defensive check
+    const text = textareaElement.value;
     if (!text) { alert('붙여넣을 텍스트를 입력해주세요.'); return; }
     try {
       const data = JSON.parse(text);
@@ -314,7 +315,7 @@ const MindmapLayout = () => {
       <div className="control-panel">
         <button onClick={() => addNode()} title="새 노드 추가 (Tab)">+</button>
         <button onClick={exportToText} title="텍스트로 복사 (Ctrl+S)">📋</button>
-        <button onClick={importFromText} title="붙여넣어 불러오기 (Ctrl+O)">📥</button>
+        <button onClick={() => setShowImportModal(true)} title="붙여넣어 불러오기 (Ctrl+O)">📥</button>
         <button onClick={resetCanvas} title="전체 삭제">🗑️</button>
         <button onClick={exportToCsv} title="CSV로 내보내기">📊</button>
         <button onClick={toggleTheme} title={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}>
@@ -332,7 +333,8 @@ const MindmapLayout = () => {
             <textarea ref={importTextRef} placeholder="이곳에 복사한 텍스트를 붙여넣으세요..."></textarea>
             <div className="modal-buttons">
               <button className="cancel-btn" onClick={() => setShowImportModal(false)}>취소</button>
-              <button className="confirm-btn" onClick={importFromText}>불러오기</button>
+              {/* [수정 2] 버튼 클릭 시 ref의 현재 값을 함수에 전달 */}
+              <button className="confirm-btn" onClick={() => importFromText(importTextRef.current)}>불러오기</button>
             </div>
           </div>
         </div>
