@@ -7,10 +7,10 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'R
 .app-wrapper { display: flex; flex-direction: column; width: 100vw; height: 100vh; background-color: #fff; }
 .dark .app-wrapper { background-color: #121212; }
 .main-content-wrapper { display: flex; flex-grow: 1; overflow: hidden; }
-.ad-container-left { width: 160px; height: 100%; flex-shrink: 0; display: flex; justify-content: center; align-items: center; background-color: #f8f9fa; }
+.ad-container-left { width: 160px; height: 100%; flex-shrink: 0; display: flex;  margin-right: 10px; justify-content: center; align-items: center; background-color: #f8f9fa; }
 .dark .ad-container-left { background-color: #212529; }
 #root { flex-grow: 1; height: 100%; }
-.ad-container-bottom { width: 100%; height: 90px; flex-shrink: 0; display: flex; justify-content: center; align-items: center; background-color: #f8f9fa; }
+.ad-container-bottom { width: 100%; height: 90px; flex-shrink: 0; display: flex; margin-top: 10px; justify-content: center; align-items: center; background-color: #f8f9fa; }
 .dark .ad-container-bottom { background-color: #212529; }
 
 .mindmap-container { width: 100%; height: 100%; position: relative; background-color: var(--background-color); color: var(--text-color); }
@@ -22,7 +22,7 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'R
   top: 20px; 
   left: 20px;
   z-index: 20; 
-  width: 320px; 
+  width: 650px; 
   background-color: var(--panel-bg-color); 
   backdrop-filter: blur(8px); 
   border: 1px solid var(--panel-border-color); 
@@ -87,3 +87,16 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'R
 .import-modal .modal-buttons .confirm-btn:hover { opacity: 0.9; }
 .import-modal .modal-buttons .cancel-btn { background-color: var(--node-bg-color); color: var(--text-color); border: 1px solid var(--node-border-color); }
 .import-modal .modal-buttons .cancel-btn:hover { opacity: 0.8; }
+
+/* [수정 3] 모바일 화면(가로 768px 이하) 대응 스타일 추가 */
+@media (max-width: 768px) {
+  /* 모바일에서는 광고 영역 숨기기 */
+  .ad-container-left, .ad-container-bottom {
+    display: none;
+  }
+  
+  /* 광고가 사라졌으므로 헤더 위치 원래대로 복원 */
+  .top-left-header {
+    left: 20px;
+  }
+}
